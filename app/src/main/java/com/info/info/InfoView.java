@@ -14,6 +14,7 @@ public interface InfoView {
         void showAlert();
         void setupError();
         void setupDBHelper();
+        void setupTitle();
     }
 
     interface Presenter{

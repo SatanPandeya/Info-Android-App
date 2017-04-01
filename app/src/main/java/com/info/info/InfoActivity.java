@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.info.Model.InfoModel;
 import com.info.R;
@@ -32,6 +33,8 @@ import butterknife.Unbinder;
  */
 
 public class InfoActivity extends ToolBarActivity implements InfoView.View {
+    @BindView(R.id.toolbarTextId)
+    TextView title;
     @BindView(R.id.infoFabId)
     FloatingActionButton infoFabButton;
     @BindView(R.id.firstNameId)
@@ -57,6 +60,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
         bindView();
         initDagger();
         setupDBHelper();
+        setupTitle();
     }
 
     @Override
@@ -92,6 +96,11 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     public void setupError() {
         firstName.setError(getString(R.string.error));
         lastName.setError(getString(R.string.error));
+    }
+
+    @Override
+    public void setupTitle() {
+        title.setText(R.string.info);
     }
 
     @OnClick(R.id.infoFabId)
