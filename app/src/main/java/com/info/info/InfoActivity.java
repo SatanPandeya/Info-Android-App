@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.info.Model.InfoModel;
 import com.info.R;
 import com.info.base.ToolBarActivity;
+import com.info.database.InfoDBHelper;
 import com.info.home.HomeActivity;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
@@ -40,8 +42,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     @Inject
     InfoPresenter infoPresenter;
     private Unbinder unbinder;
-    private ProgressDialog progressDialog;
-
+    private InfoDBHelper infoDBHelper;
     @Override
     protected int getToolbarResourceLayout() {
         return R.layout.activity_info;
@@ -55,6 +56,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
         setupPresenter();
         bindView();
         initDagger();
+        setupDBHelper();
     }
 
     @Override
@@ -82,6 +84,11 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     }
 
     @Override
+    public void setupDBHelper() {
+        infoDBHelper = new InfoDBHelper(this);
+    }
+
+    @Override
     public void setupError() {
         firstName.setError(getString(R.string.error));
         lastName.setError(getString(R.string.error));
@@ -89,12 +96,13 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @OnClick(R.id.infoFabId)
     public void navigate(View view) {
-        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
+        infoDBHelper.addToDoList(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
     }
 
 
     @Override
     public void navigate() {
+        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
         Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

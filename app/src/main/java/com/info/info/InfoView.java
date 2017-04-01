@@ -13,6 +13,7 @@ public interface InfoView {
         void navigate();
         void showAlert();
         void setupError();
+        void setupDBHelper();
     }
 
     interface Presenter{
