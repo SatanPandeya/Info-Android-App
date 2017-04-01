@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_dimen">18sp</dimen>
+    <dimen name="fab_dimen">16dp</dimen>
+    <dimen name="til_dimen">10dp</dimen>
+</resources>

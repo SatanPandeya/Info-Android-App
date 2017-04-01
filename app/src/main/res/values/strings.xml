@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Info</string>
+    <string name="home">Home</string>
+    <string name="text_confirmation">Please confirm !!!</string>
+    <string name="text_message">Are you sure ?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="second_name">Last name</string>
+    <string name="first_name">First Name</string>
+    <string name="error">Empty</string>
+</resources>
