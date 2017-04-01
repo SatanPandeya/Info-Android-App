@@ -12,10 +12,12 @@ public interface InfoView {
         void initDagger();
         void navigate();
         void showAlert();
+        void setupError();
     }
 
     interface Presenter{
         void destroy();
         void onSuccess();
+        void validCredentials(String fName, String lName);
     }
 }

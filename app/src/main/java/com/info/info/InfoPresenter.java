@@ -1,5 +1,7 @@
 package com.info.info;
 
+import android.text.TextUtils;
+
 import javax.inject.Inject;
 
 /**
@@ -17,6 +19,21 @@ public class InfoPresenter implements InfoView.Presenter {
     @Override
     public void onSuccess() {
         if (infoView != null) {
+            infoView.navigate();
+        }
+    }
+
+
+    @Override
+    public void validCredentials(String fName, String lName) {
+        boolean error = false;
+        if (TextUtils.isEmpty(fName)){
+            infoView.setupError();
+            error = true;
+        } if (TextUtils.isEmpty(lName)){
+            infoView.setupError();
+            error = true;
+        } if (!error){
             infoView.navigate();
         }
     }

@@ -81,10 +81,17 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
         DaggerInfoComponent.builder().infoModule(new InfoModule(this)).build().inject(this);
     }
 
+    @Override
+    public void setupError() {
+        firstName.setError(getString(R.string.error));
+        lastName.setError(getString(R.string.error));
+    }
+
     @OnClick(R.id.infoFabId)
     public void navigate(View view) {
-        infoPresenter.onSuccess();
+        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
     }
+
 
     @Override
     public void navigate() {
