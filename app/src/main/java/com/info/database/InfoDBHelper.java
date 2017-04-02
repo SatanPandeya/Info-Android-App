@@ -113,29 +113,6 @@ public class InfoDBHelper extends SQLiteOpenHelper {
         return infoId;
     }
 
-//    public List<InfoModel> getAllInfo(){
-//        List<InfoModel> infoModelLists = new ArrayList<>();
-//        String queryList = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_ID, FIRST_NAME, LAST_NAME);
-//        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-//        Cursor cursor  = sqLiteDatabase.rawQuery(queryList, null);
-//        try {
-//            if (cursor.moveToFirst()){
-//                do {
-//                    InfoModel infoModel = new InfoModel();
-//                    infoModel.setFName(cursor.getString(0));
-//                    infoModel.setLName(cursor.getString(1));
-//                    infoModelLists.add(infoModel);
-//                } while (cursor.moveToNext());
-//            }
-//        } catch (Exception e){
-//            Log.e(TAG, "getAllInfo: Error while trying to get posts from database");
-//        }finally {
-//            if (cursor != null && !cursor.isClosed()){
-//                cursor.close();
-//            }
-//        }
-//        return infoModelLists;
-//    }
 
     // Getting All Contacts
     public List<InfoModel> getAllInfo() {
@@ -182,45 +159,4 @@ public class InfoDBHelper extends SQLiteOpenHelper {
         }
     }
 
-//    // add info content to database
-//    public void addToDoList(InfoModel infoModel) {
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("FIRST_NAME", infoModel.getFName());
-//        contentValues.put("LAST_NAME", infoModel.getLName());
-//
-//        // insert into table
-//        sqLiteDatabase.insert(INFO_TABLE, null, contentValues);
-//        // terminate database connection
-//        sqLiteDatabase.close();
-//    }
-//
-//    // retrieve info content of database
-//    public InfoModel getToDoContent(String firstName) {
-//        SQLiteDatabase sqLiteDataBase = this.getReadableDatabase();
-//        Cursor cursor = sqLiteDataBase.query(INFO_TABLE, new String[]{KEY_ID, FIRST_NAME, LAST_NAME},
-//                KEY_ID + "=?", new String[]{firstName}, null, null, null);
-//
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        return new InfoModel(
-//                cursor.getString(0), cursor.getString(1)
-//        );
-//    }
-//
-//    // update info content of database
-//    public int updateToDoList(InfoModel infoModel) {
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("FIRST_NAME", infoModel.getFName());
-//        contentValues.put("LAST_NAME", infoModel.getLName());
-//        return sqLiteDatabase.update(INFO_TABLE, contentValues, KEY_ID + " =? ", new String[]{infoModel.getFName(), infoModel.getLName()});
-//    }
-//
-//    // delete info content of database
-//    public void deleteToDoListContent(InfoModel infoModel){
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        sqLiteDatabase.delete(INFO_TABLE, KEY_ID + " =? ", new String[]{infoModel.getFName()});
-//    }
 }
