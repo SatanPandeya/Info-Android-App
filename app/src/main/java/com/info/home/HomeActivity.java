@@ -6,15 +6,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.info.Model.InfoModel;
 import com.info.R;
 import com.info.base.ToolBarActivity;
+import com.info.database.InfoDBHelper;
 import com.info.info.InfoActivity;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,10 +35,16 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
     TextView title;
     @BindView(R.id.homeFabId)
     FloatingActionButton floatingActionButton;
+    @BindView(R.id.recyclerListViewId)
+    RecyclerView recyclerView;
 
     @Inject
     HomePresenter homePresenter;
     private Unbinder unbinder;
+    private StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private List<InfoModel> infoModelList;
+    private InfoDBHelper infoDBHelper;
+    private HomeAdapter homeAdapter;
 
     @Override
     protected int getToolbarResourceLayout() {
@@ -47,6 +60,8 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
         initDagger();
         setupStatusBarColor();
         setupTitle();
+        setupDatabase();
+        setupAdapter();
     }
 
     @Override
@@ -76,6 +91,20 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
     @Override
     public void setupTitle() {
         title.setText(R.string.home);
+    }
+
+    @Override
+    public void setupDatabase() {
+        infoDBHelper = new InfoDBHelper(this);
+    }
+
+    @Override
+    public void setupAdapter() {
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(3,1);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        infoModelList = infoDBHelper.getAllInfo();
+        homeAdapter = new HomeAdapter(this, infoModelList);
+        recyclerView.setAdapter(homeAdapter);
     }
 
     @OnClick(R.id.homeFabId)

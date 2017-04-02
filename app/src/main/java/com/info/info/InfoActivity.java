@@ -105,7 +105,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @OnClick(R.id.infoFabId)
     public void navigate(View view) {
-        infoDBHelper.addToDoList(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
+        infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
     }
 
 

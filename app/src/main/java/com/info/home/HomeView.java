@@ -12,6 +12,8 @@ public interface HomeView {
         void setupStatusBarColor();
         void setupTitle();
         void navigate();
+        void setupAdapter();
+        void setupDatabase();
     }
     interface Presenter{
         void destroy();
