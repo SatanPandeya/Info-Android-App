@@ -23,18 +23,17 @@ public class InfoPresenter implements InfoView.Presenter {
         }
     }
 
+    @Override
+    public void setupError() {
+        if (infoView != null){
+            infoView.onError();
+        }
+    }
 
     @Override
     public void validCredentials(String fName, String lName) {
-        boolean error = false;
-        if (TextUtils.isEmpty(fName)){
-            infoView.setupError();
-            error = true;
-        } if (TextUtils.isEmpty(lName)){
-            infoView.setupError();
-            error = true;
-        } if (!error){
-            infoView.navigate();
+        if (infoView != null){
+            infoView.saveData(fName, lName);
         }
     }
 

@@ -12,14 +12,16 @@ public interface InfoView {
         void initDagger();
         void navigate();
         void showAlert();
-        void setupError();
         void setupDBHelper();
         void setupTitle();
+        void saveData(String fName, String lName);
+        void onError();
     }
 
     interface Presenter{
         void destroy();
-        void onSuccess();
         void validCredentials(String fName, String lName);
+        void onSuccess();
+        void setupError();
     }
 }

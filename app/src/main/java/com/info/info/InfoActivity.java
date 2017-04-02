@@ -93,7 +93,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     }
 
     @Override
-    public void setupError() {
+    public void onError() {
         firstName.setError(getString(R.string.error));
         lastName.setError(getString(R.string.error));
     }
@@ -104,19 +104,31 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     }
 
     @OnClick(R.id.infoFabId)
-    public void navigate(View view) {
-        infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
+    public void navigateView(View view){
+        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
     }
-
 
     @Override
     public void navigate() {
-        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
+        infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
         Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
+    @Override
+    public void saveData(String fName, String lName) {
+        boolean error = false;
+        if (TextUtils.isEmpty(fName)){
+            infoPresenter. setupError();
+            error = true;
+        } if (TextUtils.isEmpty(lName)){
+            infoPresenter.setupError();
+            error = true;
+        } if (!error){
+            infoPresenter.onSuccess();
+        }
+    }
 
     @Override
     protected void onDestroy() {

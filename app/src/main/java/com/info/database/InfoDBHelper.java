@@ -59,9 +59,8 @@ public class InfoDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.beginTransaction();
         try {
             ContentValues contentValues = new ContentValues();
-            contentValues.put("KEY_ID", KEY_ID);
-            contentValues.put("FIRST_NAME", FIRST_NAME);
-            contentValues.put("LAST_NAME", LAST_NAME);
+            contentValues.put("FIRST_NAME", infoModel.getFName());
+            contentValues.put("LAST_NAME", infoModel.getLName());
 
             sqLiteDatabase.insertOrThrow(INFO_TABLE, null, contentValues);
             sqLiteDatabase.setTransactionSuccessful();
