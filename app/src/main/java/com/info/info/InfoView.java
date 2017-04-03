@@ -11,7 +11,6 @@ public interface InfoView {
         void bindView();
         void initDagger();
         void navigate();
-        void showAlert();
         void setupDBHelper();
         void setupTitle();
         void saveData(String fName, String lName);

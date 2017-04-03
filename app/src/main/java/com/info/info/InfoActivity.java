@@ -1,6 +1,5 @@
 package com.info.info;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import com.info.R;
 import com.info.base.ToolBarActivity;
 import com.info.database.InfoDBHelper;
 import com.info.home.HomeActivity;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import javax.inject.Inject;
 
@@ -142,25 +140,6 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
         Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    @Override
-    public void showAlert() {
-        new LovelyStandardDialog(this)
-                .setTopColorRes(R.color.colorOrange)
-                .setButtonsColorRes(R.color.colorOrangeButton)
-                .setTitle(R.string.text_confirmation)
-                .setIcon(R.drawable.ic_warning_black_24dp)
-                .setMessage(R.string.text_message)
-                .setPositiveButton(R.string.text_yes, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        infoPresenter.onSuccess();
-                    }
-                })
-                .setNegativeButton(R.string.text_no, null)
-                .setCancelable(false)
-                .show();
     }
 
 }
