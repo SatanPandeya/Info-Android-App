@@ -18,10 +18,9 @@ import com.info.Model.InfoModel;
 import com.info.R;
 import com.info.base.ToolBarActivity;
 import com.info.database.InfoDBHelper;
-import com.info.info.InfoActivity;
+import com.info.add.AddActivity;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -140,7 +139,7 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
 
     @Override
     public void navigate() {
-        startActivity(new Intent(HomeActivity.this, InfoActivity.class));
+        startActivity(new Intent(HomeActivity.this, AddActivity.class));
     }
 
     @Override

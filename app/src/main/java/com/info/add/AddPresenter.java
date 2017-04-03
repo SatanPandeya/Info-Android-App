@@ -1,6 +1,4 @@
-package com.info.info;
-
-import android.text.TextUtils;
+package com.info.add;
 
 import javax.inject.Inject;
 
@@ -8,11 +6,11 @@ import javax.inject.Inject;
  * Created by wolfmatrix on 4/1/17.
  */
 
-public class InfoPresenter implements InfoView.Presenter {
-    private InfoView.View infoView;
+public class AddPresenter implements AddView.Presenter {
+    private AddView.View infoView;
 
     @Inject
-    public InfoPresenter(InfoView.View infoView) {
+    public AddPresenter(AddView.View infoView) {
         this.infoView = infoView;
     }
 

@@ -1,10 +1,10 @@
-package com.info.info;
+package com.info.add;
 
 /**
  * Created by wolfmatrix on 4/1/17.
  */
 
-public interface InfoView {
+public interface AddView {
     interface View{
         void setupStatusBarColor();
         void setupPresenter();

@@ -1,4 +1,4 @@
-package com.info.info;
+package com.info.add;
 
 import android.content.Intent;
 import android.os.Build;
@@ -30,7 +30,7 @@ import butterknife.Unbinder;
  * Created by wolfmatrix on 4/1/17.
  */
 
-public class InfoActivity extends ToolBarActivity implements InfoView.View {
+public class AddActivity extends ToolBarActivity implements AddView.View {
     @BindView(R.id.toolbarTextId)
     TextView title;
     @BindView(R.id.infoFabId)
@@ -41,7 +41,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     TextInputEditText lastName;
 
     @Inject
-    InfoPresenter infoPresenter;
+    AddPresenter infoPresenter;
     private Unbinder unbinder;
     private InfoDBHelper infoDBHelper;
     @Override
@@ -72,7 +72,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @Override
     public void setupPresenter() {
-        infoPresenter = new InfoPresenter(this);
+        infoPresenter = new AddPresenter(this);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @Override
     public void initDagger() {
-        DaggerInfoComponent.builder().infoModule(new InfoModule(this)).build().inject(this);
+        DaggerAddComponent.builder().addModule(new AddModule(this)).build().inject(this);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @Override
     public void setupTitle() {
-        title.setText(R.string.info);
+        title.setText(R.string.add);
     }
 
     @OnClick(R.id.infoFabId)
@@ -109,7 +109,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
     @Override
     public void navigate() {
         infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
-        Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
+        Intent intent = new Intent(AddActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -137,7 +137,7 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
+        Intent intent = new Intent(AddActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
