@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".info.InfoActivity"/>
+        <activity android:name=".info.InfoActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
     </application>
 
 </manifest>
