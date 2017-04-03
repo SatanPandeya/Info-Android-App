@@ -139,7 +139,9 @@ public class InfoActivity extends ToolBarActivity implements InfoView.View {
 
     @Override
     public void onBackPressed() {
-        showAlert();
+        Intent intent = new Intent(InfoActivity.this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
