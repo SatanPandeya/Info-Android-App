@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.info.Model.InfoModel;
 import com.info.R;
@@ -105,6 +106,17 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
         infoModelList = infoDBHelper.getAllInfo();
         homeAdapter = new HomeAdapter(this, infoModelList);
         recyclerView.setAdapter(homeAdapter);
+        recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(this, recyclerView, new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(HomeActivity.this, "Clicked: " + infoModelList.get(position).getFName() , Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(HomeActivity.this, "Long Clicked: " + infoModelList.get(position).getFName(), Toast.LENGTH_LONG).show();
+            }
+        }));
     }
 
     @OnClick(R.id.homeFabId)
