@@ -1,6 +1,8 @@
 package com.info.info;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +36,7 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
     @Inject InfoPresenter infoPresenter;
     private Unbinder unbinder;
     private InfoDBHelper infoDBHelper;
+    private InfoModel infoModel;
 
     @BindView(R.id.coToolbarId)
     Toolbar toolbar;
@@ -99,6 +102,9 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
 
     @Override
     public void setupTitle() {
+        String tagName = getIntent().getStringExtra("ClickItemFirstName");
+        infoModel = infoDBHelper.getInfo(tagName);
+        title.setText(infoModel.getFName() + " " + infoModel.getLName());
     }
 
     @Override

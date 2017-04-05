@@ -110,6 +110,7 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                intent.putExtra("ClickItemFirstName", infoModelList.get(position).getFName());
                 startActivity(intent);
             }
 

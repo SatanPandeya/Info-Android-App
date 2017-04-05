@@ -112,6 +112,29 @@ public class InfoDBHelper extends SQLiteOpenHelper {
         return infoId;
     }
 
+    // getting single information
+    public InfoModel getInfo(String FName){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        InfoModel infoModel = null;
+        Cursor cursor = sqLiteDatabase.query(INFO_TABLE, new String[]{FIRST_NAME, LAST_NAME}, FIRST_NAME + " =? ", new String[]{FName}, null, null, null);
+        try {
+            if (cursor.moveToFirst()){
+                do {
+                    infoModel = new InfoModel();
+                    infoModel.setFName(cursor.getString(0));
+                    infoModel.setLName(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e){
+            Log.e(TAG, "getInfo: Error while trying to get info");
+        } finally {
+            if (cursor != null && !cursor.isClosed()){
+                cursor.close();
+                sqLiteDatabase.close();
+            }
+        }
+        return infoModel;
+    }
 
     // Getting All Contacts
     public List<InfoModel> getAllInfo() {
