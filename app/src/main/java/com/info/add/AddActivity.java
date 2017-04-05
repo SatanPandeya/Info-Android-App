@@ -46,7 +46,7 @@ public class AddActivity extends ToolBarActivity implements AddView.View {
     private InfoDBHelper infoDBHelper;
     @Override
     protected int getToolbarResourceLayout() {
-        return R.layout.activity_info;
+        return R.layout.activity_add;
     }
 
     @Override

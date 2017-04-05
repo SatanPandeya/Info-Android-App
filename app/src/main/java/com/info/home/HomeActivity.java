@@ -19,6 +19,7 @@ import com.info.R;
 import com.info.base.ToolBarActivity;
 import com.info.database.InfoDBHelper;
 import com.info.add.AddActivity;
+import com.info.info.InfoActivity;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import java.util.List;
@@ -108,7 +109,8 @@ public class HomeActivity extends ToolBarActivity implements HomeView.View {
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(this, recyclerView, new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(HomeActivity.this, "Clicked: " + infoModelList.get(position).getFName() , Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                startActivity(intent);
             }
 
             @Override
