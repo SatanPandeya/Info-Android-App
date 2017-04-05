@@ -1,11 +1,10 @@
 package com.info.info;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,9 +17,6 @@ import com.info.R;
 import com.info.base.CoordinatorToolbarActivity;
 import com.info.database.InfoDBHelper;
 import com.info.home.HomeActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,6 +38,8 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
     Toolbar toolbar;
     @BindView(R.id.coToolbarTitleId)
     TextView title;
+    @BindView(R.id.coCollapsingToolbarLayoutId)
+    CollapsingToolbarLayout collapsingToolbarLayout;
     @Override
     protected int getCoordinatorResourceLayout() {
         return R.layout.activity_info;
@@ -104,7 +102,7 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
     public void setupTitle() {
         String tagName = getIntent().getStringExtra("ClickItemFirstName");
         infoModel = infoDBHelper.getInfo(tagName);
-        title.setText(infoModel.getFName() + " " + infoModel.getLName());
+        collapsingToolbarLayout.setTitle(infoModel.getFName() + " " + infoModel.getLName());
     }
 
     @Override
