@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.info.Model.InfoModel;
 import com.info.R;
@@ -36,8 +35,6 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
 
     @BindView(R.id.coToolbarId)
     Toolbar toolbar;
-    @BindView(R.id.coToolbarTitleId)
-    TextView title;
     @BindView(R.id.coCollapsingToolbarLayoutId)
     CollapsingToolbarLayout collapsingToolbarLayout;
     @Override
