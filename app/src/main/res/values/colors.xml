@@ -7,4 +7,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorStatusBar">#FF3D00</color>
     <color name="colorOrangeButton">#FF7043</color>
+    <color name="colorPhoneDividerLine">#E0E0E0</color>
 </resources>

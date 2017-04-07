@@ -1,12 +1,14 @@
 package com.info.info;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +31,7 @@ import butterknife.Unbinder;
  */
 
 public class InfoActivity extends CoordinatorToolbarActivity implements InfoView.View{
+    private static final String TAG = "InfoActivity";
     @Inject InfoPresenter infoPresenter;
     private Unbinder unbinder;
     private InfoDBHelper infoDBHelper;
@@ -104,6 +107,19 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
         infoModel = infoDBHelper.getInfo(tagName);
         collapsingToolbarLayout.setTitle(infoModel.getFName() + " " + infoModel.getLName());
         phoneNumber.setText(infoModel.getPhoneNumber());
+        final String contactNumber = "tel:" + phoneNumber;
+        phoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(contactNumber));
+                    startActivity(intent);
+                } catch (SecurityException e){
+                    Log.e(TAG, "onClick: Error while calling the number");
+                }
+            }
+        });
     }
 
     @Override

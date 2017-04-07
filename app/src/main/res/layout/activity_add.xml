@@ -18,7 +18,8 @@
                 android:id="@+id/firstNameId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/first_name" />
+                android:hint="@string/first_name"
+                android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -29,7 +30,8 @@
                 android:id="@+id/lastNameId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/second_name" />
+                android:hint="@string/second_name"
+                android:inputType="textCapWords" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -40,7 +42,8 @@
                 android:id="@+id/phoneNumberId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_number" />
+                android:hint="@string/phone_number"
+                android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
