@@ -29,9 +29,9 @@ public class AddPresenter implements AddView.Presenter {
     }
 
     @Override
-    public void validCredentials(String fName, String lName) {
+    public void validCredentials(String fName, String lName, String phNo) {
         if (infoView != null){
-            infoView.saveData(fName, lName);
+            infoView.saveData(fName, lName, phNo);
         }
     }
 

@@ -13,13 +13,13 @@ public interface AddView {
         void navigate();
         void setupDBHelper();
         void setupTitle();
-        void saveData(String fName, String lName);
+        void saveData(String fName, String lName, String phNo);
         void onError();
     }
 
     interface Presenter{
         void destroy();
-        void validCredentials(String fName, String lName);
+        void validCredentials(String fName, String lName, String phNo);
         void onSuccess();
         void setupError();
     }

@@ -29,6 +29,7 @@ public class InfoDBHelper extends SQLiteOpenHelper {
     private static final String KEY_ID = "ID";
     private static final String FIRST_NAME = "FIRST_NAME";
     private static final String LAST_NAME = "LAST_NAME";
+    private static final String PHONE_NUMBER = "PHONE_NUMBER";
 
     public InfoDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +41,8 @@ public class InfoDBHelper extends SQLiteOpenHelper {
                 + "("
                 + KEY_ID + "INTEGER PRIMARY KEY,"
                 + FIRST_NAME + " TEXT, "
-                + LAST_NAME + " TEXT "
+                + LAST_NAME + " TEXT, "
+                + PHONE_NUMBER + " TEXT "
                 + ")";
 
         sqLiteDatabase.execSQL(CREATE_INFO_TABLE);
@@ -61,6 +63,7 @@ public class InfoDBHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("FIRST_NAME", infoModel.getFName());
             contentValues.put("LAST_NAME", infoModel.getLName());
+            contentValues.put("PHONE_NUMBER", infoModel.getPhoneNumber());
 
             sqLiteDatabase.insertOrThrow(INFO_TABLE, null, contentValues);
             sqLiteDatabase.setTransactionSuccessful();
@@ -79,6 +82,7 @@ public class InfoDBHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("FIRST_NAME", infoModel.getFName());
             contentValues.put("LAST_NAME", infoModel.getLName());
+            contentValues.put("PHONE_NUMBER", infoModel.getPhoneNumber());
 
             // try to update information if already exists
             int rows = sqLiteDatabase.update(INFO_TABLE, contentValues, FIRST_NAME + "= ?", new String[]{infoModel.getFName()});
@@ -87,7 +91,7 @@ public class InfoDBHelper extends SQLiteOpenHelper {
 
             if (rows == 1) {
                 // get primary key of info
-                String queryInfo = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_ID, FIRST_NAME, LAST_NAME);
+                String queryInfo = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER);
                 Cursor cursor = sqLiteDatabase.rawQuery(queryInfo, new String[]{String.valueOf(infoModel.getFName())});
                 try {
                     if (cursor.moveToFirst()) {
@@ -116,13 +120,14 @@ public class InfoDBHelper extends SQLiteOpenHelper {
     public InfoModel getInfo(String FName){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         InfoModel infoModel = null;
-        Cursor cursor = sqLiteDatabase.query(INFO_TABLE, new String[]{FIRST_NAME, LAST_NAME}, FIRST_NAME + " =? ", new String[]{FName}, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(INFO_TABLE, new String[]{FIRST_NAME, LAST_NAME, PHONE_NUMBER}, FIRST_NAME + " =? ", new String[]{FName}, null, null, null);
         try {
             if (cursor.moveToFirst()){
                 do {
                     infoModel = new InfoModel();
                     infoModel.setFName(cursor.getString(0));
                     infoModel.setLName(cursor.getString(1));
+                    infoModel.setPhoneNumber(cursor.getString(2));
                 } while (cursor.moveToNext());
             }
         } catch (Exception e){
@@ -151,6 +156,7 @@ public class InfoDBHelper extends SQLiteOpenHelper {
                 InfoModel infoModel = new InfoModel();
                 infoModel.setFName(cursor.getString(1));
                 infoModel.setLName(cursor.getString(2));
+                infoModel.setPhoneNumber(cursor.getString(3));
                 // Adding contact to list
                 infoModelList.add(infoModel);
             } while (cursor.moveToNext());
@@ -165,7 +171,8 @@ public class InfoDBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("FIRST_NAME", FIRST_NAME);
         contentValues.put("LAST_NAME", LAST_NAME);
-        return sqLiteDatabase.update(INFO_TABLE, contentValues, FIRST_NAME + " =?", new String[]{infoModel.getFName(), infoModel.getLName()});
+        contentValues.put("PHONE_NUMBER", PHONE_NUMBER);
+        return sqLiteDatabase.update(INFO_TABLE, contentValues, FIRST_NAME + " =?", new String[]{infoModel.getFName(), infoModel.getLName(), infoModel.getPhoneNumber()});
     }
 
     public void deleteInfo() {

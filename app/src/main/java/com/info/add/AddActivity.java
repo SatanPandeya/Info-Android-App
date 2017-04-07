@@ -39,11 +39,14 @@ public class AddActivity extends ToolBarActivity implements AddView.View {
     TextInputEditText firstName;
     @BindView(R.id.lastNameId)
     TextInputEditText lastName;
+    @BindView(R.id.phoneNumberId)
+    TextInputEditText phoneNumber;
 
     @Inject
     AddPresenter infoPresenter;
     private Unbinder unbinder;
     private InfoDBHelper infoDBHelper;
+
     @Override
     protected int getToolbarResourceLayout() {
         return R.layout.activity_add;
@@ -102,28 +105,26 @@ public class AddActivity extends ToolBarActivity implements AddView.View {
     }
 
     @OnClick(R.id.infoFabId)
-    public void navigateView(View view){
-        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString());
+    public void navigateView(View view) {
+        infoPresenter.validCredentials(firstName.getText().toString(), lastName.getText().toString(), phoneNumber.getText().toString());
     }
 
     @Override
     public void navigate() {
-        infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString()));
+        infoDBHelper.addInfo(new InfoModel(firstName.getText().toString(), lastName.getText().toString(), phoneNumber.getText().toString()));
         Intent intent = new Intent(AddActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     @Override
-    public void saveData(String fName, String lName) {
+    public void saveData(String fName, String lName, String phNo) {
         boolean error = false;
-        if (TextUtils.isEmpty(fName)){
-            infoPresenter. setupError();
-            error = true;
-        } if (TextUtils.isEmpty(lName)){
+        if (TextUtils.isEmpty(fName) && TextUtils.isEmpty(lName) && TextUtils.isEmpty(phNo)) {
             infoPresenter.setupError();
             error = true;
-        } if (!error){
+        }
+        if (!error) {
             infoPresenter.onSuccess();
         }
     }

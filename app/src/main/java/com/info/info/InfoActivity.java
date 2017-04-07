@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.info.Model.InfoModel;
 import com.info.R;
@@ -37,6 +38,8 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
     Toolbar toolbar;
     @BindView(R.id.coCollapsingToolbarLayoutId)
     CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.phoneNumberId)
+    TextView phoneNumber;
     @Override
     protected int getCoordinatorResourceLayout() {
         return R.layout.activity_info;
@@ -100,6 +103,7 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
         String tagName = getIntent().getStringExtra("ClickItemFirstName");
         infoModel = infoDBHelper.getInfo(tagName);
         collapsingToolbarLayout.setTitle(infoModel.getFName() + " " + infoModel.getLName());
+        phoneNumber.setText(infoModel.getPhoneNumber());
     }
 
     @Override

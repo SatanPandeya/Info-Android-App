@@ -32,6 +32,17 @@
                 android:hint="@string/second_name" />
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/phoneNumberId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_number" />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
