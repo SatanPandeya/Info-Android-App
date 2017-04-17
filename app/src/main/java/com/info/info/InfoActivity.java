@@ -107,13 +107,13 @@ public class InfoActivity extends CoordinatorToolbarActivity implements InfoView
         infoModel = infoDBHelper.getInfo(tagName);
         collapsingToolbarLayout.setTitle(infoModel.getFName() + " " + infoModel.getLName());
         phoneNumber.setText(infoModel.getPhoneNumber());
-        final String contactNumber = "tel:" + phoneNumber;
+        final String contactNumber = phoneNumber.getText().toString();
+        Log.e(TAG, "setupTitle: "+contactNumber);
         phoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(contactNumber));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contactNumber, null));
                     startActivity(intent);
                 } catch (SecurityException e){
                     Log.e(TAG, "onClick: Error while calling the number");
